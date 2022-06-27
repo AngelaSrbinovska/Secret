@@ -178,6 +178,6 @@ app.post("/submit", (req, res) => {
 });
 
 var port = 3000;
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log("Successfully Started App");
 });
