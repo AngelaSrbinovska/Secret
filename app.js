@@ -7,17 +7,12 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const findOrCreate = require("mongoose-findorcreate");
-//const encrypt = require("mongoose-encryption");
-//const md5 = require("md5");
-//const bcrypt = require("bcrypt");
-//const saltRounds = 10;
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-//Application
 const app = express();
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -32,7 +27,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Database
 mongoose.connect("mongodb://localhost:27017/userDB");
 const Schema = mongoose.Schema;
 
@@ -74,7 +68,6 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-//Routes
 app.get("/", (req, res) => {
   res.render("home");
 });
@@ -89,7 +82,6 @@ app.get("/auth/google/secrets",
     failureRedirect: "/login"
   }),
   function(req, res) {
-    // Successful authentication, redirect home.
     res.redirect("/secrets");
   });
 
